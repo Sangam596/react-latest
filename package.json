@@ -22,7 +22,8 @@
   "homepage": "https://github.com/Sangam596/react-latest#readme",
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.27.0"
   },
   "devDependencies": {
     "parcel": "^2.12.0",
