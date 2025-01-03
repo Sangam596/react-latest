@@ -34,10 +34,13 @@
 .res-card{
   margin: 15px;
   width: 200px;
+  height: 400px;
   background: #f0f0f0;
+
+ 
 }
-.res-card > p {
-  display: inline;
+.res-card > h4 {
+  color: black;
 }
 .res-card:hover{
  cursor : pointer;

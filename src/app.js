@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import About from "../components/About";
 import Contact from "../components/Contact";
 import Error from "../components/Error";
+import RestroMenu from "../components/RestroMenu";
 
 
 document.body.innerHTML = '<div id="root"></div>';
@@ -21,6 +22,7 @@ const AppLayout = () => {
   );
 };
 const appRouter = createBrowserRouter([
+  
   {
     path: "/",
     element: <AppLayout />,
@@ -37,6 +39,10 @@ const appRouter = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+      {
+        path: "/restroMenu/:restid",
+        element: <RestroMenu  />,
+      }
         ],
     errorElement : < Error/>
   },
