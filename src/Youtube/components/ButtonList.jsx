@@ -1,13 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRef, useState, useEffect } from "react";
 import Button from "./Botton";
-import { buttonList } from "../utils/constants";
+import { YOUTUBE_CATAGORY_API } from "../utils/constants";
+import ButtonShimmer from "./ButtonShimmer";
+import { useDispatch } from "react-redux";
+import { setVideoCatgory } from "../utils/youtubeSlice";
+// import { buttonList } from "../utils/constants";
 
 const ButtonList = () => {
   const scrollRef = useRef(null);
+  const [buttonList, setButtonList] = useState([]);
   const [showLeft, setShowLeft] = useState(false);
   const [showRight, setShowRight] = useState(false);
   const [currentBtn, setCurrentBtn] = useState(0);
+
+  const dispatch = useDispatch();
 
   const checkScroll = () => {
     if (scrollRef.current) {
@@ -33,7 +40,6 @@ const ButtonList = () => {
 
   const handleWheel = (e) => {
     if (scrollRef.current) {
-      e.preventDefault();
       scrollRef.current.scrollBy({ left: e.deltaY * 2, behavior: "smooth" });
       requestAnimationFrame(checkScroll);
     }
@@ -45,6 +51,7 @@ const ButtonList = () => {
       checkScroll();
       scrollRef.current.addEventListener("scroll", checkScroll);
     }
+    getCats();
 
     return () => {
       if (scrollRef.current) {
@@ -52,6 +59,16 @@ const ButtonList = () => {
       }
     };
   }, []);
+
+  const getCats = async () => {
+    const response = await fetch(YOUTUBE_CATAGORY_API);
+    let data = await response.json();
+    data = data.items.map(item => {
+      return {id:item?.id, title:item?.snippet?.title}
+    })
+    setButtonList(data)
+
+  }
 
   return (
     <div className="relative bg-white shadow-md py-2 overflow-hidden">
@@ -69,14 +86,19 @@ const ButtonList = () => {
         onWheel={handleWheel}
         className="flex overflow-x-auto whitespace-nowrap scroll-smooth mx-12 [&::-webkit-scrollbar]:hidden scrollbar-hide"
       >
-        {buttonList.en.map((item, i) => (
-          <Button
-            key={item.name}
-            name={item.name}
-            isActive={currentBtn === i}
-            setCurrentBtn={() => setCurrentBtn(i)}
-          />
-        ))}
+        {buttonList.length === 0 ? (
+          <ButtonShimmer />
+        ) : (
+          buttonList.map((item, i) => (
+            <Button
+              key={item.id}
+              name={item.title}
+              isActive={currentBtn === i}
+              setCurrentBtn={() => setCurrentBtn(i)}
+              setCatgoryId={() =>{ dispatch(setVideoCatgory(item.id))}}
+            />
+          ))
+        )}
       </div>
 
       {showRight && (

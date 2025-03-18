@@ -10,8 +10,13 @@ export const AVAILABLE_LANG = [{
 
 export const buttonList = {
     "en": [
-        { "name": "All" },
-        { "name": "News" },
+        {
+            "name": "All",
+            catagoryId:0
+        },
+        {
+            "name": "News",
+            catagoryId: 0 },
         { "name": "Music" },
         { "name": "Live" },
         { "name": "Sports" },
@@ -46,6 +51,7 @@ export const buttonList = {
 }
 
 
-const YOUTUBE_AUTH_KEY = "AIzaSyDVjMhk4t0b2t2LlYfqbDIyFBcEc0jyo6Y";
+export const YOUTUBE_AUTH_KEY = "AIzaSyDVjMhk4t0b2t2LlYfqbDIyFBcEc0jyo6Y";
 
-export const YOUTUBE_API_URL = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=IN&maxResults=50&key=${YOUTUBE_AUTH_KEY}`
+export const YOUTUBE_CATAGORY_API = `https://youtube.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=IN&key=${YOUTUBE_AUTH_KEY}`
+export const YOUTUBE_API_URL = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=IN&maxResults=50`

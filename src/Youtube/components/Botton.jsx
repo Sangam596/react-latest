@@ -1,8 +1,8 @@
 // eslint-disable-next-line react/prop-types
-const Button = ({ name, isActive, setCurrentBtn }) => {
+const Button = ({ name, isActive, setCurrentBtn, setCatgoryId }) => {
   return (
     <button
-      onClick={setCurrentBtn}
+      onClick={() => { setCurrentBtn(); setCatgoryId(); }}
       className={`mx-1 p-1 px-4 text-md rounded-lg transition-all border-b-4 ${
         isActive
           ? "bg-black text-white border-red-500"

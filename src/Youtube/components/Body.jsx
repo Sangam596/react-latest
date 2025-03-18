@@ -1,9 +1,11 @@
 import MainContainer from "./MainContainer";
 import Sidebar from "./Sidebar";
 import ButtonList from "./ButtonList";
+import { useSelector } from "react-redux";
 
 
 const Body = () => {
+  const videoCatgory = useSelector((store) => store.youtube.videoCatgory);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-12">
@@ -20,7 +22,7 @@ const Body = () => {
         {/* Scrollable Main Body */}
         <div className="overflow-auto">
           <div className="flex">
-            <MainContainer />
+            <MainContainer videoCatgory={videoCatgory} />
           </div>
         </div>
       </div>
