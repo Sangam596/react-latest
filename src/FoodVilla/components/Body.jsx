@@ -102,7 +102,7 @@ const Body = () => {
         />
       </div>
 
-      <div className="flex flex-wrap w-12/12 m-2 mt-10 justify-items-center gap-2">
+      <div className="flex flex-wrap w-full m-2 mx-5 mt-10 justify-center gap-2">
         {filteredestaurantList?.map((rest) => (
           <Link
             to={`/food/restroMenu/${rest?.info?.id}`}
