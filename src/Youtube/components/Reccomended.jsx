@@ -10,19 +10,17 @@ import SideVideo from "./SideVideo";
 import { SideShimmer } from "./Shimmer";
 // import MainContainer from './MainContainer';
 
-const Reccomended = ({id}) => {
+const Reccomended = () => {
   const [videos, setVideos] = useState([]);
 
-  console.log(`id`,id)
   useEffect(() => {
-    getVideos(`${YOURTUBE_RECOMMNDED}`);
-  }, []);
+    if (videos.length===0) getVideos(`${YOURTUBE_RECOMMNDED}`);
+  },[]);
 
   const getVideos = async (api) => {
     try {
       const response = await fetch(api);
       const data = await response.json();
-      console.log(data)
       setVideos(data.items);
     } catch (error) {
       console.log(error)

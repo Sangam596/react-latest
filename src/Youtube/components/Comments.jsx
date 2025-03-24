@@ -9,7 +9,7 @@ const NthComments = () => {
 const Comments = () => {
   const buttons = [
     {
-      title: "Live Comments",
+      title: "Comments",
       component: LiveComments,
     },
     {
@@ -20,7 +20,7 @@ const Comments = () => {
   return (
     <div className="">
       {buttons.map((button) => (
-        <button className="m-2 p-2 border shadow-lg rounded-lg bg-slate-200" key={button.title}>
+        <button className="m-4 p-2 px-4 border shadow-lg rounded-lg bg-slate-200" key={button.title}>
           {button.title}
         </button>
       ))}

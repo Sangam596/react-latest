@@ -40,12 +40,18 @@ const MainContainer = () => {
   };
 
   return (
-    <div className="w-full flex flex-col md:flex-row md:flex-wrap items-center md:ml-10 space-y-2 space-x-2 ">
+    <div className="w-full flex flex-col md:flex-row md:flex-wrap items-center md:ml-10 space-y-2 space-x-2 justify-center">
       {videos?.length === 0 ? (
         <Shimmer />
       ) : (
         videos.map((video, i) => (
-          <Link key={i} to={"/youtube/watch?v=" +( video.id.videoId ? video.id.videoId : video.id)}>
+          <Link
+            key={i}
+            to={
+              "/youtube/watch?v=" +
+              (video.id.videoId ? video.id.videoId : video.id)
+            }
+          >
             <VideoContainer data={video} />
           </Link>
         ))

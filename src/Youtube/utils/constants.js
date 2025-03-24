@@ -51,10 +51,10 @@ export const buttonList = {
 }
 
 
-export const YOUTUBE_AUTH_KEY = "AIzaSyC7OFImKQ8Rsp9HvoB8WzTXGZLWm8-5cHc";
+export const YOUTUBE_AUTH_KEY = "AIzaSyAKQ5IT-v0STQHrXnmmbDLgbQgNU-fm_tI";
 
 export const YOUTUBE_CATAGORY_API = `https://youtube.googleapis.com/youtube/v3/videoCategories?part=snippet&regionCode=IN&key=${YOUTUBE_AUTH_KEY}`
 export const YOUTUBE_API_URL = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=IN&maxResults=50`
 export const YOUTUBE_SUGGESSION_API = `http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=`
 export const YOUTUBE_SEARCH_VIDEOS = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&regionCode=IN&videoCaption=any`
-export const YOURTUBE_RECOMMNDED = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=IN&maxResults=50&key=${YOUTUBE_AUTH_KEY}`
+export const YOURTUBE_RECOMMNDED = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=IN&maxResults=20&key=${YOUTUBE_AUTH_KEY}`

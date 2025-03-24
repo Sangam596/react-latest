@@ -4,7 +4,6 @@ import { setSearchQuery } from "../utils/youtubeSlice";
 const SearchResults = ({ suggestions, setShowSearchIcon }) => {
   const dispatch = useDispatch();
 
-  const searchQuery = useSelector((store) => store.youtube.searchQuery);
 
   return (
     <div className="absolute translate-y-[29px] -translate-x-4 md:-translate-x-6 top-0 w-[240px] md:w-[500px] bg-slate-50 my-5 rounded-lg">

@@ -4,7 +4,7 @@ import { AVAILABLE_LANG, YOUTUBE_SUGGESSION_API } from "../utils/constants";
 import { useEffect, useState } from "react";
 import { Menu, Search, User } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { setLanguage, setSearchQuery } from "../utils/youtubeSlice";
+import { hideMenu, setLanguage, setSearchCache, setSearchQuery } from "../utils/youtubeSlice";
 import SearchResults from "./SearchResults";
 
 const Header = () => {
@@ -12,12 +12,20 @@ const Header = () => {
   const [searchInput, setSearchInput] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const dispatch = useDispatch();
-
+  const searchCache = useSelector(store=>store.youtube.searchCache)
   const setLanguageHandler = (e) => {
     dispatch(setLanguage(e.target.value));
   };
 
+  const handleSearchInputonEnter = (e) => {
+   (e.key === 'Enter')  && dispatch(setSearchQuery(e.target.value));
+  
+  }
 
+  const handleSearchInput = ()=>{
+    dispatch(setSearchQuery(searchInput));
+
+  }
   const getSuggessions = async () => {
     try {
       const response = await fetch(
@@ -25,6 +33,11 @@ const Header = () => {
       );
       const data = await response.json();
       setSuggestions(data?.[1] || []);
+      dispatch(
+        setSearchCache({
+          [searchInput]: data?.[1] || [],
+        })
+      );
     } catch (error) {
       console.error("Error fetching suggestions:", error);
     }
@@ -35,8 +48,13 @@ const Header = () => {
       setSuggestions([]); // Clear suggestions if input is empty
       return;
     }
+
     const timer = setTimeout(() => {
-      getSuggessions();
+      if (searchCache[searchInput]) {
+        setSuggestions(searchCache[searchInput]);
+      } else {
+        getSuggessions();
+      } 
     }, 200);
 
     return () => clearTimeout(timer);
@@ -45,7 +63,7 @@ const Header = () => {
   return (
     <div className=" flex items-center justify-between  p-2  bg-slate-100 rounded-lg fixed top-0 left-0 w-full z-50 ">
       <div className="flex  items-center">
-        <Menu className="m-2 items-center  cursor-pointer" />
+        <Menu className="m-2 items-center  cursor-pointer" onClick={()=>dispatch(hideMenu())} />
         <Link to="/youtube">
           <img
             className="h-3 md:h-5 cursor-pointer"
@@ -60,10 +78,16 @@ const Header = () => {
           type="text"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
+          onKeyDown={(e) => handleSearchInputonEnter(e)}
           className="w-60 md:w-[500px] ml-1 md:p-2 pl-2 md:pl-4 border border-gray-300 rounded-l-full bg-white shadow-md outline-none placeholder-slate-500"
           placeholder={`${showSearchIcon ? "🔍" : ""} Search `}
         />
-        <button className="border border-gray-300 border-l-0 mr-2 bg-gray-200  rounded-r-full md:p-2  shadow-md">
+        <button
+          className="border border-gray-300 border-l-0 mr-2 bg-gray-200  rounded-r-full md:p-2  shadow-md"
+          onClick={(e) => {
+            handleSearchInput(e);
+          }}
+        >
           <Search />
         </button>
         {showSearchIcon && (
