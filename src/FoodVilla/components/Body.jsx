@@ -31,7 +31,6 @@ const Body = () => {
         ? setFilteredestaurantList(restList)
         : setFilteredestaurantList(mockData);
     } catch (error) {
-      console.log(`fetchData`, error.message);
       setRestaurantList(mockData);
       setFilteredestaurantList(mockData);
     }

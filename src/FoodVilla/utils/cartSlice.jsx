@@ -12,11 +12,9 @@ const cartSlice = createSlice({
        state.items.push(action.payload)
     },
     removeItem: (state, action) => {
-      console.log(`action`, action);
       const index = state.items.findIndex((item) =>
         item.includes(action.payload)
       );
-      console.log(`index`, index);
       if (index !== -1) {
         state.items.splice(index, 1); 
       }

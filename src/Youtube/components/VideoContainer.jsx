@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 
 const VideoContainer = ({data}) => {
+  const { statistics, snippet }  = data;
+  const viewCount = statistics?.viewCount;
 
-  const { statistics, snippet } = data;
-  const { viewCount, commentCount, likeCount } = statistics;
   const { channelTitle, title, thumbnails } = snippet;
 
   const formatViews = (views) => {
@@ -24,7 +24,7 @@ const VideoContainer = ({data}) => {
       <div className="flex flex-col flex-grow justify-between min-h-[120px]">
         <h3 className="font-bold mx-1 ">{title}</h3>
         <p className="text-gray-600 mx-1">{channelTitle}</p>
-        <p className="text-gray-500 mx-1">{formatViews(viewCount)}</p>
+        {viewCount && <p className="text-gray-500 mx-1">{formatViews(viewCount)}</p>}
       </div>
     </div>
   );

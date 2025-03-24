@@ -1,26 +1,51 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Link } from "react-router-dom";
-import { AVAILABLE_LANG } from "../utils/constants";
-import { useState } from "react";
-import { Search, User } from "lucide-react";
+import { AVAILABLE_LANG, YOUTUBE_SUGGESSION_API } from "../utils/constants";
+import { useEffect, useState } from "react";
+import { Menu, Search, User } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { setLanguage } from "../utils/youtubeSlice";
+import { setLanguage, setSearchQuery } from "../utils/youtubeSlice";
+import SearchResults from "./SearchResults";
 
 const Header = () => {
-  const [showSearchIcon, setShowSearchIcon] = useState(false)
-  const lang = useSelector(store => store.youtube.lang)
-  const dispatch = useDispatch()
+  const [showSearchIcon, setShowSearchIcon] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const dispatch = useDispatch();
+
   const setLanguageHandler = (e) => {
-    dispatch(setLanguage(e.target.value))
-  }
-console.log(`Language`, lang);
+    dispatch(setLanguage(e.target.value));
+  };
+
+
+  const getSuggessions = async () => {
+    try {
+      const response = await fetch(
+        `${YOUTUBE_SUGGESSION_API}${encodeURIComponent(searchInput)}`
+      );
+      const data = await response.json();
+      setSuggestions(data?.[1] || []);
+    } catch (error) {
+      console.error("Error fetching suggestions:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (!searchInput.trim()) {
+      setSuggestions([]); // Clear suggestions if input is empty
+      return;
+    }
+    const timer = setTimeout(() => {
+      getSuggessions();
+    }, 200);
+
+    return () => clearTimeout(timer);
+  }, [searchInput]);
+
   return (
-    <div className=" flex items-center justify-between mt-2 p-2  bg-slate-100 rounded-lg  ">
-      <div className="flex items-end">
-        <img
-          className="h-3 md:h-6  pr-1 md:pr-6 cursor-pointer"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF5CjgU72QaHzBdU5Iy4Ba4SwDqBG1IG_fmximyxLIcCkFrALaZObbwVY&usqp=CAE&s"
-          alt="hamberger menu"
-        />
+    <div className=" flex items-center justify-between  p-2  bg-slate-100 rounded-lg fixed top-0 left-0 w-full z-50 ">
+      <div className="flex  items-center">
+        <Menu className="m-2 items-center  cursor-pointer" />
         <Link to="/youtube">
           <img
             className="h-3 md:h-5 cursor-pointer"
@@ -32,15 +57,24 @@ console.log(`Language`, lang);
       <div className="flex items-center justify-center">
         <input
           onFocus={() => setShowSearchIcon(true)}
-          onBlur={() => setShowSearchIcon(false)}
-          type="text "
-          className="w-40 md:w-[500px] ml-1 md:p-2 pl-2 md:pl-4 border border-gray-300 rounded-l-full bg-white shadow-md outline-none placeholder-slate-500"
+          type="text"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          className="w-60 md:w-[500px] ml-1 md:p-2 pl-2 md:pl-4 border border-gray-300 rounded-l-full bg-white shadow-md outline-none placeholder-slate-500"
           placeholder={`${showSearchIcon ? "🔍" : ""} Search `}
         />
         <button className="border border-gray-300 border-l-0 mr-2 bg-gray-200  rounded-r-full md:p-2  shadow-md">
           <Search />
         </button>
+        {showSearchIcon && (
+          <SearchResults
+            className={`${showSearchIcon ? "block" : "hidden"}`}
+            suggestions={suggestions}
+            setShowSearchIcon={setShowSearchIcon}
+          />
+        )}
       </div>
+
       <div>
         <select
           id="language"

@@ -21,20 +21,21 @@ const Index = () => {
         </p>
       </object>
 
-      <h1 className="text-green-400 z-10  bg-black/40 rounded-t-lg pb-4">Select The Project</h1>
+      <h1 className="text-green-400 z-10  bg-black/40 rounded-t-lg pb-4">
+        Select The Project
+      </h1>
       <ul className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-10 z-10  bg-slate-700/40 p-4 rounded-lg shadow-lg">
-        <li className="p-1 hover:text-lime-500 transition-colors duration-300">
-          <Link to="/portfolio">My Portfolio</Link>
+        <li className="p-2 hover:text-red-600 transition-colors duration-300">
+          <Link to="/youtube">YouTube</Link>
         </li>
-        <li className="p-1 hover:text-red-400 transition-colors duration-300">
-          <Link to="/netflix">Netflix GPT</Link>
-        </li>
-        <li className="p-1 hover:text-blue-500 transition-colors duration-300">
+        <li className="p-2 hover:text-blue-500 transition-colors duration-300">
           <Link to="/food">Food Villa</Link>
         </li>
-
-        <li className="p-1 hover:text-red-600 transition-colors duration-300">
-          <Link to="/youtube">YouTube</Link>
+        <li className="p-2 hover:text-red-400 transition-colors duration-300">
+          <Link to="/netflix">Netflix GPT</Link>
+        </li>
+        <li className="p-2 hover:text-lime-500 transition-colors duration-300">
+          <Link to="/portfolio">My Portfolio</Link>
         </li>
       </ul>
     </div>

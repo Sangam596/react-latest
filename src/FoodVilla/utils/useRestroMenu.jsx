@@ -12,7 +12,6 @@ const useRestroMenu = (restid) => {
       const response = await fetch(`${MENU_URL}${restid}`);
       const menu = await response.json();
       setRestroMenu(menu?.data);
-      console.log(menu?.data);
     } catch (error) {
       console.log(error.message);
       

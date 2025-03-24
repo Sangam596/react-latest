@@ -7,13 +7,13 @@ const RestroItems = (props) => {
   const dispatch = useDispatch();
   const handleDispatch = (item) => {
     dispatch(addItem(item));
-  }
+  };
   return (
     <div>
       {/* Map over the data array if it exists */}
       {props?.data?.length > 0 &&
         props.data.map((item, index) => (
-          <div 
+          <div
             data-testid="food-items"
             key={index}
             className="flex flex-wrap  bg-gray-100 my-4 shadow-lg hover:bg-gray-100 "
@@ -21,7 +21,8 @@ const RestroItems = (props) => {
             <div className="w-9/12 m-3">
               <h1 className="text-left font-bold">
                 {item?.card?.info?.name || "No Name"} - ₹{" "}
-                {item?.card?.info?.price/100 || item?.card?.info?.defaultPrice/100}
+                {item?.card?.info?.price / 100 ||
+                  item?.card?.info?.defaultPrice / 100}
               </h1>
               <p className="p-2 text-xs text-left">
                 {item?.card?.info?.description || "No Description"}
@@ -29,8 +30,10 @@ const RestroItems = (props) => {
             </div>
             <div className="w-2/12 m-2 relative">
               {/* Button */}
-              <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-6 bg-black text-white rounded-md  shadow-md hover:bg-gray-600  cursor-pointer"
-              onClick={()=>handleDispatch(item)}>
+              <button
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 translate-y-6 bg-black text-white rounded-md  shadow-md hover:bg-gray-600  cursor-pointer"
+                onClick={() => handleDispatch(item)}
+              >
                 Add +
               </button>
 
@@ -50,8 +53,8 @@ const RestroItems = (props) => {
 export const EnhancedRestroItems = (RestroItems) => {
   const dispatch = useDispatch();
   const clearCartDispatchHandler = () => {
-  dispatch(clearCart());
-}
+    dispatch(clearCart());
+  };
   return (props) => {
     return (
       <div>

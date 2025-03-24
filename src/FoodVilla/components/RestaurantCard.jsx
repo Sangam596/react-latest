@@ -8,11 +8,7 @@ const RestaurantCard = (props) => {
       const { loggedInUser, isLoggedIn} = useContext(UserContext);
 
     return (
-<<<<<<< HEAD
-      <div data-testid="res-card" className=" w-[200px] h-full bg-gray-200  rounded-lg  hover:bg-gray-300 hover:border-2 border-neutral-600">
-=======
       <div data-testid="res-card" className=" w-[280px] h-full bg-gray-200  rounded-lg  hover:bg-gray-300 hover:border-2 border-neutral-600">
->>>>>>> 9138480 (resolved conflicts)
         <img
           className="p-1 rounded-lg min-h-60"
           alt="Food Logo"
@@ -24,7 +20,6 @@ const RestaurantCard = (props) => {
         <h4 className="m-1">{restData?.slaString}</h4>
         <h4 className="m-1">{restData?.costForTwo}</h4>
         <h4 className="m-1">{loggedInUser}</h4>
-
         <h4 className="m-1">{isLoggedIn}</h4>
       </div>
     );

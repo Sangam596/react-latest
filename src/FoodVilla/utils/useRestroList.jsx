@@ -12,13 +12,11 @@ const useRestroList = () => {
        try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data);
         const restList =
             data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
               ?.restaurants;
               setRestaurantList(restList);
        } catch (error) {
-        console.log(`fetchData`,error.message);
        } 
     }
     return restaurantList;

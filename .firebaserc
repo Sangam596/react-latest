@@ -1,7 +1,9 @@
 {
   "projects": {
     "default": "mediafusion-92721",
-    "staging": "sangam-merndev"
+    "staging": "sangam-merndev",
+    "no": "sangam-merndev",
+    "Prod": "sangam-merndev"
   },
   "targets": {},
   "etags": {}
