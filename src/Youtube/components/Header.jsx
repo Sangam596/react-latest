@@ -99,25 +99,8 @@ const Header = () => {
         )}
       </div>
 
-      <div>
-        <select
-          id="language"
-          name="langauge"
-          className="hover:bg-black hover:text-white rounded-lg"
-          onChange={(e) => setLanguageHandler(e)}
-        >
-          {AVAILABLE_LANG.map((item) => (
-            <option
-              className="md:p-2 bg-slate-400 hover:bg-black"
-              key={item.name}
-              value={item.value}
-            >
-              {item.name}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div>
+     
+      <div className="mr-6">
         <User />
       </div>
     </div>

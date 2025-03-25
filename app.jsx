@@ -14,6 +14,7 @@ import { lazy, Suspense } from "react";
 import { Applayout as YoutubeLayout, Body as YoutubeBody } from "./src/Youtube";
 import Watch from "./src/Youtube/components/WatchPage";
 import Index from "./src/Index";
+import PageNotFound from "./src/Youtube/components/PageNotFound";
 
 const About = lazy(() => import("./src/FoodVilla/components/About"))
 
@@ -22,7 +23,7 @@ const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <Index />,
-    errorElement: <Error />,
+    errorElement: <PageNotFound />,
   },
   {
     path: "/food",
@@ -53,7 +54,7 @@ const appRouter = createBrowserRouter([
         element: <Cart />,
       },
     ],
-    errorElement: <Error />,
+    errorElement: <PageNotFound />,
   },
   {
     path: "/netflix",
@@ -64,7 +65,7 @@ const appRouter = createBrowserRouter([
         element: <NetflixBody />,
       },
     ],
-    errorElement: <Error />,
+    errorElement: <PageNotFound />,
   },
   {
     path: "/youtube/",
@@ -79,7 +80,11 @@ const appRouter = createBrowserRouter([
         element: <Watch />,
       },
     ],
-    errorElement: <Error />,
+    errorElement: <PageNotFound  />,
+  },
+  {
+    path: "*",
+    element: <PageNotFound />,
   },
 ]);
 document.body.innerHTML = '<div id="root"></div>';

@@ -9,17 +9,16 @@ import {
 } from "../utils/constants";
 import Shimmer from "./Shimmer";
 import VideoContainer from "./VideoContainer";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import PageNotFound from "./PageNotFound";
 // import MainContainer from './MainContainer';
 
 const MainContainer = () => {
   const [videos, setVideos] = useState([]);
   const videoCatgory = useSelector((store) => store.youtube.videoCatgory);
-  const location = useLocation();
-  const isWatchPage = location.pathname.startsWith("/watch");
   const searchQuery = useSelector((store) => store.youtube.searchQuery);
-
+  const [error, setError] = useState(false);
   useEffect(() => {
     getVideos(
       `${YOUTUBE_API_URL}&videoCategoryId=${videoCatgory}&key=${YOUTUBE_AUTH_KEY}`
@@ -34,17 +33,30 @@ const MainContainer = () => {
   }, [searchQuery]);
 
   const getVideos = async (api) => {
-    const response = await fetch(api);
-    const data = await response.json();
-    setVideos(data.items);
+    try {
+      const response = await fetch(api);
+      const data = await response.json();
+      if (data?.error?.code) {
+        setError(true);
+      }
+      else {
+        setError(false);
+        setVideos(data.items);
+      }
+    } catch (error) {
+      console.log(`Error while fetching Videos`, error);
+      setError(true);
+    }
   };
 
   return (
-    <div className="w-full flex flex-col md:flex-row md:flex-wrap items-center md:ml-10 space-y-2 space-x-2 justify-center">
-      {videos?.length === 0 ? (
+    <div className="w-full h-full flex flex-col md:flex-row md:flex-wrap items-center space-y-1 space-x-1 justify-start ">
+      {error ? (
+        <PageNotFound />
+      ) : videos?.length === 0 ? (
         <Shimmer />
       ) : (
-        videos.map((video, i) => (
+        videos?.map((video, i) => (
           <Link
             key={i}
             to={
@@ -59,7 +71,5 @@ const MainContainer = () => {
     </div>
   );
 };
-
-
 
 export default MainContainer;
