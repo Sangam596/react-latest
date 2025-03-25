@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { hideMenu, setSearchCache, setSearchQuery } from "../utils/youtubeSlice";
 import SearchResults from "./SearchResults";
 import { YOUTUBE_SUGGESSION_API } from "../utils/constants";
+import Breadcrumbs from "../../../Breadcrumbs";
 
 const Header = () => {
   const [showSearchIcon, setShowSearchIcon] = useState(false);
@@ -59,9 +60,15 @@ const Header = () => {
   }, [searchInput]);
 
   return (
-    <div className=" flex items-center justify-between  p-2  bg-slate-100 rounded-lg fixed top-0 left-0 w-full z-30 ">
+    <div className=" flex items-center justify-between  p-2  bg-slate-100 rounded-lg fixed top-0 left-0 w-full z-50 ">
+      <span className="fixed top-0 w-fit shadow-md z-50 ">
+        <Breadcrumbs className="text-sm hover:bg-gray-200" />
+      </span>
       <div className="flex  items-center">
-        <Menu className="m-2 items-center  cursor-pointer" onClick={()=>dispatch(hideMenu())} />
+        <Menu
+          className="m-2 items-center  cursor-pointer"
+          onClick={() => dispatch(hideMenu())}
+        />
         <Link to="/youtube">
           <img
             className="h-3 md:h-5 cursor-pointer"
@@ -97,7 +104,6 @@ const Header = () => {
         )}
       </div>
 
-     
       <div className="mr-6">
         <User />
       </div>

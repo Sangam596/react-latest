@@ -5,7 +5,7 @@ const Breadcrumbs = ({ className }) => {
   const paths = location.pathname.split("/").filter((path) => path);
 
   return (
-    <nav className={`p-1  ${className}`}>
+    <nav className={`p-1   rounded-lg ${className}`}>
       <Link to="/" className="text-blue-600">
         Home
       </Link>

@@ -6,6 +6,7 @@ import ListCities from "./ListCities";
 import { useState } from "react";
 import { Provider } from "react-redux";
 import store from "../../../store";
+import Breadcrumbs from "../../../Breadcrumbs";
 
 const AppLayout = () => {
   const [loggedInUser, setLoggedInUser] = useState("Sangam");
@@ -15,6 +16,9 @@ const AppLayout = () => {
 
   return (
     <div className="m-0 p-0">
+      <span className="fixed top-0 w-fit shadow-md z-50 ">
+        <Breadcrumbs className="text-sm hover:bg-gray-200" />
+      </span>
       <Provider store={store}>
         <UserContext.Provider
           value={{
