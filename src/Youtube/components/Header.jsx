@@ -59,7 +59,7 @@ const Header = () => {
   }, [searchInput]);
 
   return (
-    <div className=" flex items-center justify-between  p-2  bg-slate-100 rounded-lg fixed top-0 left-0 w-full z-50 ">
+    <div className=" flex items-center justify-between  p-2  bg-slate-100 rounded-lg fixed top-0 left-0 w-full z-30 ">
       <div className="flex  items-center">
         <Menu className="m-2 items-center  cursor-pointer" onClick={()=>dispatch(hideMenu())} />
         <Link to="/youtube">

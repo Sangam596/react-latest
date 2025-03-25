@@ -3,6 +3,7 @@ import Comments from "./Comments";
 import Reccomended from "./Reccomended";
 import { useState } from "react";
 import LiveChat from "./LiveChat";
+import Breadcrumbs from './../../../Breadcrumbs';
 
 const Watch = () => {
   const [searchParam] = useSearchParams();
@@ -12,6 +13,8 @@ const Watch = () => {
   return (
     <div className="w-full flex flex-col md:flex-row my-20 px-4 md:px-8">
       {/* Left: Video Player & Comments */}
+      <Breadcrumbs />
+
       <div className="md:w-[800px]">
         <iframe
           className="w-full h-56 md:h-[450px] rounded-lg"
