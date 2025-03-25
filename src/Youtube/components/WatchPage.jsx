@@ -28,8 +28,8 @@ const Watch = () => {
       <div>
         <div className="flex justify-between mx-8 mb-2">
           <button
-            className={`font-bold text-center p-1 bg-black text-white rounded-lg border-b-4${
-              showVideos && " border-b-red-400"
+            className={`font-bold text-center p-1 bg-black text-white rounded-lg border-4 ${
+              showVideos && " rounded-b-0 rounded-lg border-t-red-400"
             }`}
             onClick={() => {
               SetShowLiveChat(!showLiveChat);
@@ -39,8 +39,8 @@ const Watch = () => {
             Most Popular Videos
           </button>
           <button
-            className={`font-bold text-center p-1 bg-green-400 rounded-lg border-b-4${
-              showLiveChat && " border-b-red-400"
+            className={`font-bold text-center p-1 bg-green-400 rounded-lg border-4 border-b-0 ${
+              showLiveChat && " rounded-b-0 rounded-lg border-red-400"
             }`}
             onClick={() => {
               SetShowLiveChat(!showLiveChat);
@@ -51,8 +51,8 @@ const Watch = () => {
           </button>
         </div>
         <div
-          className={`md:w-[400px] md:ml-2 mt-4 md:mt-0  max-h-[70vh] bg-slate-100 shadow-lg ${
-            showLiveChat && "md:overflow-y-auto"
+          className={`md:w-[400px] md:ml-2 mt-4 md:-mt-2 max-h-[70vh] bg-slate-100 shadow-lg ${
+            showLiveChat && "rounded-t-lg"
           }`}
         >
           {showLiveChat ? <LiveChat /> : <Reccomended />}

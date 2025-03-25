@@ -58,3 +58,5 @@ export const YOUTUBE_API_URL = `https://youtube.googleapis.com/youtube/v3/videos
 export const YOUTUBE_SUGGESSION_API = `http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=`
 export const YOUTUBE_SEARCH_VIDEOS = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&regionCode=IN&videoCaption=any`
 export const YOURTUBE_RECOMMNDED = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=IN&maxResults=20&key=${YOUTUBE_AUTH_KEY}`
+
+export const LIVE_CHAT_OFFSET = 100;

@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 
-import { CircleOff } from "lucide-react";
 import { useSelector } from "react-redux";
 
 const VideoContainer = ({data}) => {
@@ -21,13 +20,13 @@ const VideoContainer = ({data}) => {
   return (
     <div
       className={`${
-        hideMenu ? "md:w-[270px]" : "md:w-[300px]"
-      } h-[320px] p-2 m-1 shadow-lg rounded-lg flex flex-col hover:bg-slate-200`}
+        hideMenu ? "md:w-[270px]" : " md:w-[300px]"
+      } h-full w-full md:h-[320px] p-2 m-1 shadow-lg rounded-lg flex flex-col hover:bg-slate-200`}
     >
       {/* ✅ Ensuring Fixed Image Height */}
-      <div className="w-full h-[180px] overflow-hidden">
+      <div className="w-full h-full md:h-[180px] md:overflow-hidden">
         <img
-          className="rounded-lg w-full h-full object-cover"
+          className="rounded-lg w-screen h-full object-cover"
           src={thumbnails.medium.url}
           alt="video"
         />

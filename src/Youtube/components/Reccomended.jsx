@@ -28,7 +28,7 @@ const Reccomended = () => {
   };
 
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col rounded-lg ">
       {videos?.length === 0 ? (
         <SideShimmer />
       ) : (
