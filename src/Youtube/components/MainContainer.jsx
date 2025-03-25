@@ -52,7 +52,9 @@ const MainContainer = () => {
   return (
     <div className="w-full h-full flex flex-col md:flex-row md:flex-wrap items-center space-y-1 space-x-1 justify-start ">
       {error ? (
-        <PageNotFound />
+        <div className="w-full flex justify-center items-center">
+          <PageNotFound />
+        </div>
       ) : videos?.length === 0 ? (
         <Shimmer />
       ) : (

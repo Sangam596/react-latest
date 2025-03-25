@@ -1,92 +1,182 @@
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-import {
-  Body, Contact,
-  Error,
-  RestroMenu,
-  AppLayout,
-  Cart,
-} from "./src/FoodVilla/components";
-import { AppLayout as NetflixLayout, Body as NetflixBody } from "./src/Netflix/components";
 import { lazy, Suspense } from "react";
-
-import { Applayout as YoutubeLayout, Body as YoutubeBody } from "./src/Youtube";
-import Watch from "./src/Youtube/components/WatchPage";
-import Index from "./src/Index";
-import PageNotFound from "./src/Youtube/components/PageNotFound";
-
-const About = lazy(() => import("./src/FoodVilla/components/About"))
+import Loading from "./src/Loading";
 
 
+const AppLayout = lazy(() => import("./src/FoodVilla/components/AppLayout"));
+const Body = lazy(() => import("./src/FoodVilla/components/Body"));
+const About = lazy(() => import("./src/FoodVilla/components/About"));
+const Contact = lazy(() => import("./src/FoodVilla/components/Contact"));
+const RestroMenu = lazy(() => import("./src/FoodVilla/components/RestroMenu"));
+const Cart = lazy(() => import("./src/FoodVilla/components/Cart"));
+
+// Lazy Loading for named exports
+const NetflixLayout = lazy(async () => {
+  const module = await import("./src/Netflix/components/AppLayout");
+  return { default: module.AppLayout };
+});
+
+const NetflixBody = lazy(async () => {
+  const module = await import("./src/Netflix/components/Body");
+  return { default: module.Body };
+});
+
+const YoutubeLayout = lazy(async () => {
+  const module = await import("./src/Youtube");
+  return { default: module.Applayout };
+});
+
+const YoutubeBody = lazy(async () => {
+  const module = await import("./src/Youtube");
+  return { default: module.Body };
+});
+
+const Watch = lazy(() => import("./src/Youtube/components/WatchPage"));
+
+const PageNotFound = lazy( () => import("./src/Youtube/components/PageNotFound"));
+
+
+const Index = lazy(async () => {
+  const module = await import("./src/Index");
+  return { default: module.default };
+});
+
+// Define routes
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <Index />,
-    errorElement: <PageNotFound />,
+    element: (
+      <Suspense fallback={<Loading />}>
+        <Index />
+      </Suspense>
+    ),
+    errorElement: (
+      <Suspense fallback={<Loading />}>
+        <PageNotFound />
+      </Suspense>
+    ),
   },
   {
     path: "/food",
-    element: <AppLayout />,
+    element: (
+      <Suspense fallback={<Loading />}>
+        <AppLayout />
+      </Suspense>
+    ),
     children: [
       {
         path: "/food",
-        element: <Body />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Body />
+          </Suspense>
+        ),
       },
       {
         path: "/food/about",
         element: (
-          <Suspense fallback={<h1>LOADING.....!</h1>}>
+          <Suspense fallback={<Loading />}>
             <About />
           </Suspense>
         ),
       },
       {
         path: "/food/contact",
-        element: <Contact />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Contact />
+          </Suspense>
+        ),
       },
       {
         path: "/food/restroMenu/:restid",
-        element: <RestroMenu />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <RestroMenu />
+          </Suspense>
+        ),
       },
       {
         path: "/food/cart",
-        element: <Cart />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Cart />
+          </Suspense>
+        ),
       },
     ],
-    errorElement: <PageNotFound />,
+    errorElement: (
+      <Suspense fallback={<Loading />}>
+        <PageNotFound />
+      </Suspense>
+    ),
   },
   {
     path: "/netflix",
-    element: <NetflixLayout />,
+    element: (
+      <Suspense fallback={<Loading />}>
+        <NetflixLayout />
+      </Suspense>
+    ),
     children: [
       {
         path: "/netflix/browse",
-        element: <NetflixBody />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <NetflixBody />
+          </Suspense>
+        ),
       },
     ],
-    errorElement: <PageNotFound />,
+    errorElement: (
+      <Suspense fallback={<Loading />}>
+        <PageNotFound />
+      </Suspense>
+    ),
   },
   {
-    path: "/youtube/",
-    element: <YoutubeLayout />,
+    path: "/youtube",
+    element: (
+      <Suspense fallback={<Loading />}>
+        <YoutubeLayout />
+      </Suspense>
+    ),
     children: [
       {
-        path: "/youtube/",
-        element: <YoutubeBody />,
+        path: "/youtube",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <YoutubeBody />
+          </Suspense>
+        ),
       },
       {
         path: "/youtube/watch",
-        element: <Watch />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Watch />
+          </Suspense>
+        ),
       },
     ],
-    errorElement: <PageNotFound  />,
+    errorElement: (
+      <Suspense fallback={<Loading />}>
+        <PageNotFound />
+      </Suspense>
+    ),
   },
   {
     path: "*",
-    element: <PageNotFound />,
+    element: (
+      <Suspense fallback={<Loading />}>
+        <PageNotFound />
+      </Suspense>
+    ),
   },
 ]);
+
+// Render App
 document.body.innerHTML = '<div id="root"></div>';
 const root = createRoot(document.getElementById("root"));
 root.render(<RouterProvider router={appRouter} />);

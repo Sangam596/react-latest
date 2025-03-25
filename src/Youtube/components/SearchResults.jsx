@@ -7,7 +7,7 @@ const SearchResults = ({ suggestions, setShowSearchIcon }) => {
 
   return (
     <div className="absolute translate-y-[29px] -translate-x-4 md:-translate-x-6 top-0 w-[240px] md:w-[500px] bg-slate-50 my-5 rounded-lg">
-      {suggestions?.map((sugg, index) => (
+      {(suggestions.length > 0) && suggestions?.map((sugg, index) => (
         <div
           key={index}
           className="p-2 px-4 w-full shadow-lg rounded-md  hover:bg-slate-200 hover:rounded-md"

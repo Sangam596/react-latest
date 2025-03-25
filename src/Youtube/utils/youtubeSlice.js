@@ -22,7 +22,6 @@ const youtubeSlice = createSlice({
             state.hideMenu= !state.hideMenu
         },
         setSearchCache: (state, action) => {
-            console.log(`first`, action.payload)
             state.searchCache = { ...state.searchCache, ...action.payload }
         
         },

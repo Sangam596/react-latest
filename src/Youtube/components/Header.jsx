@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Link } from "react-router-dom";
-import { AVAILABLE_LANG, YOUTUBE_SUGGESSION_API } from "../utils/constants";
 import { useEffect, useState } from "react";
 import { Menu, Search, User } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { hideMenu, setLanguage, setSearchCache, setSearchQuery } from "../utils/youtubeSlice";
+import { hideMenu, setSearchCache, setSearchQuery } from "../utils/youtubeSlice";
 import SearchResults from "./SearchResults";
+import { YOUTUBE_SUGGESSION_API } from "../utils/constants";
 
 const Header = () => {
   const [showSearchIcon, setShowSearchIcon] = useState(false);
@@ -13,9 +13,7 @@ const Header = () => {
   const [suggestions, setSuggestions] = useState([]);
   const dispatch = useDispatch();
   const searchCache = useSelector(store=>store.youtube.searchCache)
-  const setLanguageHandler = (e) => {
-    dispatch(setLanguage(e.target.value));
-  };
+ 
 
   const handleSearchInputonEnter = (e) => {
    (e.key === 'Enter')  && dispatch(setSearchQuery(e.target.value));
